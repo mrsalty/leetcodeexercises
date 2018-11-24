@@ -1,3 +1,4 @@
-/.vs/Algos/v15/*
+/.vs/*
 [Bb]in/
 [Oo]bj/
+db.*

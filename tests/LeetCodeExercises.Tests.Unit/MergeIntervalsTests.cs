@@ -15,7 +15,6 @@ namespace LeetCodeExercises.Tests.Unit
         }
 
         [Test]
-        [Ignore("Implementation not finalized")]
         public void WhenMergeIntervals_MergeCorrectly()
         {
             //var arr = new Interval[]

@@ -12,88 +12,39 @@ namespace LeetCodeExercises
         {
             public IList<Interval> Merge(IList<Interval> intervals)
             {
-                var dest = new List<Interval>();
-                var destCount = 0;
-
-                MergeItems(intervals, dest);
-
-                return dest;
-            }
-
-            public void MergeItems(IList<Interval> src, IList<Interval> dest)
-            {
-                if (src == null || src.Count == 0)
+                var ret = new List<Interval>();
+                if (intervals == null || intervals.Count == 0)
                 {
-                    return;
+                    return ret;
                 }
 
-                var item = src[0];
-                var toList = src.ToList();
-                toList.RemoveAt(0);
-                src = toList.ToArray();
+                intervals = intervals.OrderBy(x => x.start).ToList();
 
-                bool add = false;
-                if (dest.Count > 0)
+                foreach (Interval interval in intervals)
                 {
-                    var destCount = dest.Count;
-                    for (int i = 0; i < destCount; i++)
+                    if (ret.Count == 0)
                     {
-                        if (Overlap(item, dest[i]) || StartEndBothInternal(item, dest[i]))
+                        ret.Add(interval);
+                    }
+                    else
+                    {
+                        var last = ret[ret.Count - 1];
+
+                        if (interval.start <= last.end)
                         {
-                            //they match, ignore
-                        }
-                        else if (StartEndBothInternal(dest[i], item))
-                        {
-                            dest[i].start = item.start;
-                            dest[i].end = item.end;
-                        }
-                        else if (StartInternal(item, dest[i]))
-                        {
-                            dest[i].end = item.end;
-                        }
-                        else if (EndInternal(item, dest[i]))
-                        {
-                            dest[i].start = item.start;
+                            if (interval.end > last.end)
+                            {
+                                last.end = interval.end;
+                            }
                         }
                         else
                         {
-                            add = true;
+                            ret.Add(interval);
                         }
                     }
                 }
-                else
-                {
-                    add = true;
-                }
 
-                if (add)
-                {
-                    dest.Add(item);
-                }
-
-                MergeItems(src, dest);
-            }
-
-            private static bool Overlap(Interval item, Interval interval)
-            {
-                return interval.start == item.start && interval.end == item.end;
-            }
-
-            private static bool StartEndBothInternal(Interval item, Interval interval)
-            {
-                return (item.start > interval.start && item.start < interval.end) &&
-                       (item.end > interval.start && item.end < interval.end);
-            }
-
-            private static bool StartInternal(Interval item, Interval interval)
-            {
-                return (item.start >= interval.start && item.start <= interval.end) &&
-                       (item.end > interval.end);
-            }
-
-            private static bool EndInternal(Interval item, Interval interval)
-            {
-                return (item.end >= interval.start && item.end <= interval.end) && (item.start < interval.start);
+                return ret;
             }
         }
     }
