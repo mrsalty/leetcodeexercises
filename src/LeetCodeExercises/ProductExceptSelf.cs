@@ -1,23 +1,32 @@
 ﻿namespace LeetCodeExercises
 {
+    /// <summary>
+    /// https://leetcode.com/problems/product-of-array-except-self/
+    /// </summary>
     public class ProductExceptSelf
     {
         public class Solution
         {
             public int[] ProductExceptSelf(int[] nums)
             {
-                int[] result = new int[nums.Length];
-                for (int i = 0, tmp = 1; i < nums.Length; i++)
+                var res = new int[nums.Length];
+
+                //traverse from left 
+                var tmp = 1;
+                for (var i = 0; i < nums.Length; i++)
                 {
-                    result[i] = tmp;
+                    res[i] = tmp;
                     tmp *= nums[i];
                 }
-                for (int i = nums.Length - 1, tmp = 1; i >= 0; i--)
+
+                tmp = 1;
+                //traverse from right 
+                for (var i = nums.Length - 1; i >= 0; i--)
                 {
-                    result[i] *= tmp;
+                    res[i] *= tmp;
                     tmp *= nums[i];
                 }
-                return result;
+                return res;
             }
         }
     }
