@@ -26,7 +26,7 @@ namespace LeetCodeExercises.Tests.Unit
         [TestCase(new[] { 25, 0, 1 }, 25, 0)]
         [TestCase(new[] { 6, 7, 0, 1, 2, 4 }, 6, 0)]
         [TestCase(new[] { 6, 7, 0, 1, 2, 4 }, 2, 4)]
-        [TestCase(new[] { 4, 5, 6, 7, 0, 1, 2 }, 0, 4)]
+        [TestCase(new[] { 4, 5, 6, 7, 0, 1, 2 }, 2, 6)]
         [TestCase(new[] { 4, 5, 6, 7, 0, 1, 2 }, 4, 0)]
         [TestCase(new[] { 4, 5, 6, 7, 0, 1, 2 }, 34, -1)]
         public void WhenSortedRotatedArray_AndTarget_ThenReturnsIndex(int[] source, int target, int expected)

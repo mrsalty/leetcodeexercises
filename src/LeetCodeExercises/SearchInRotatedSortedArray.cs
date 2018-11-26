@@ -19,7 +19,6 @@ namespace LeetCodeExercises
             {
                 var middelItemIndex = nums.Length / 2;
                 var middleItem = nums[middelItemIndex];
-                var remainder = nums.Length % 2 > 0 ? 1 : 0;
                 var firstItem = nums[0];
                 var lastItem = nums[nums.Length - 1];
 
