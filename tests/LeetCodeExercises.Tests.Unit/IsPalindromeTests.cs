@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace LeetCodeExercises.Tests.Unit
 {
@@ -23,10 +20,9 @@ namespace LeetCodeExercises.Tests.Unit
         [TestCase("amanaplanacanalpanama", true)]
         [TestCase("Sir, I demand, I am a maid named Iris", true)]
         [TestCase("Bob: \"Did Anna peep ?\" Anna:\"Did Bob?\"", true)]
-        public void GivenString_ReturnIsPalindrome(string str, bool result)
+        public void GivenString_ReturnIsPalindrome(string str, bool expected)
         {
-            var isPalindrome = _sut.IsPalindrome(str);
-            Assert.AreEqual(result, isPalindrome);
+            Assert.AreEqual(expected, _sut.IsPalindrome(str));
         }
     }
 }

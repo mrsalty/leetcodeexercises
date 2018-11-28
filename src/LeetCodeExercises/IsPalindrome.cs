@@ -11,7 +11,9 @@ namespace LeetCodeExercises
         {
             public bool IsPalindrome(string s)
             {
-                int i = 0, j = s.Length - 1;
+                int i = 0;
+                int j = s.Length - 1;
+
                 while (i < j)
                 {
                     while (i < j && !Char.IsLetterOrDigit(s[i]))
