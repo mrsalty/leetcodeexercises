@@ -9,7 +9,7 @@ namespace LeetCodeExercises
     {
         public class Solution
         {
-            public bool WordBreak(string s, ISet<string> wordDict)
+            public bool WordBreak(string s, IList<string> wordDict)
             {
                 int length = s.Length;
 

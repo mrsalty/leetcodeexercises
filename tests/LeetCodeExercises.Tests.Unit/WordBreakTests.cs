@@ -23,7 +23,7 @@ namespace LeetCodeExercises.Tests.Unit
         [TestCase("cbca", new[] { "bc", "ca" }, false)]
         public void GivenStringAndArrayOfStrings_ThenCheckIfWordBreakApplies(string s, string[] words, bool exptected)
         {
-            Assert.AreEqual(exptected, _sut.WordBreak(s, words.ToHashSet()));
+            Assert.AreEqual(exptected, _sut.WordBreak(s, words));
         }
     }
 }
