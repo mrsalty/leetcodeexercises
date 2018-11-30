@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace LeetCodeExercises
 {
@@ -13,34 +9,26 @@ namespace LeetCodeExercises
     {
         public class Solution
         {
-            public bool WordBreak(string str, IList<string> wordDict)
+            public bool WordBreak(string s, ISet<string> wordDict)
             {
-                return WordBreakRecurrent(str, str, wordDict);
-            }
+                int length = s.Length;
 
-            public bool WordBreakRecurrent(string source, string str, IList<string> wordDict)
-            {
-                if (str == string.Empty) return true;
+                var results = new bool[length + 1];
 
-                var isWordBreak = false;
-                for (var i = 0; i < wordDict.Count && !isWordBreak; i++)
+                results[0] = true;
+                for (var i = 1; i < length + 1; i++)
                 {
-                    if (str.Contains(wordDict[i]))
+                    for (var j = 0; j < i; j++)
                     {
-                        var strWithoutCurrent = str;
-                        while (strWithoutCurrent.IndexOf(wordDict[i]) >= 0)
+                        var substring = s.Substring(j, i - j);
+                        if (results[j] && wordDict.Contains(substring))
                         {
-                            strWithoutCurrent = strWithoutCurrent.Remove(strWithoutCurrent.IndexOf(wordDict[i]),
-                                wordDict[i].Length);
+                            results[i] = true;
+                            break;
                         }
-
-                        var wordDictWithoutCurrent = new List<string>(wordDict);
-                        wordDictWithoutCurrent.RemoveAt(i);
-                        isWordBreak = WordBreak(strWithoutCurrent, wordDictWithoutCurrent);
                     }
                 }
-
-                return isWordBreak;
+                return results[length];
             }
         }
     }
