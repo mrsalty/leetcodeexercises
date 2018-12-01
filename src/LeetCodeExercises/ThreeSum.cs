@@ -6,67 +6,36 @@ namespace LeetCodeExercises
 {
     public class ThreeSum
     {
+        /// <summary>
+        /// https://leetcode.com/problems/3sum/
+        /// Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? 
+        /// Find all unique triplets in the array which gives the sum of zero.
+        /// Note: The solution set must not contain duplicate triplets.
+        /// </summary>
         public class Solution
         {
             public IList<IList<int>> ThreeSum(int[] nums)
             {
-                var results = new Dictionary<string, IList<int>>();
-
-                Array.Sort(nums);
-
-                var negatives = new List<int>();
-                var positives = new List<int>();
-                var zeroesCount = 0;
-                foreach (var num in nums)
+                var ret = new List<IList<int>>();
+                for (var i = 2; i < nums.Length; i++)
                 {
-                    if (num < 0)
+                    for (var j = 1; j < i; j++)
                     {
-                        negatives.Add(num);
-                    }
-                    else
-                    {
-                        if (num == 0)
-                            zeroesCount++;
-                        positives.Add(num);
-                    }
-                }
-
-                if (zeroesCount >= 3)
-                {
-                    results.Add("000", new List<int>() { 0, 0, 0 });
-                }
-
-                //loop negatives
-                for (int i = 0; i < negatives.Count; i++)
-                {
-                    //try with duplets of negatives
-                    for (int j = i + 1; j < negatives.Count; j++)
-                    {
-                        for (int k = 0; k < positives.Count; k++)
+                        for (var k = 0; k < j; k++)
                         {
-                            if (negatives[i] + negatives[j] + positives[k] == 0)
+                            if (nums[i] + nums[j] + nums[k] == 0)
                             {
-                                if (!results.ContainsKey($"{negatives[i]}{negatives[j]}{positives[k]}"))
-                                    results.Add($"{negatives[i]}{negatives[j]}{positives[k]}", new List<int>() { negatives[i], negatives[j], positives[k] });
-                            }
-                        }
-                    }
-
-                    //try with duplets of positives
-                    for (int j = 0; j < positives.Count; j++)
-                    {
-                        for (int k = j + 1; k < positives.Count; k++)
-                        {
-                            if (negatives[i] + positives[j] + positives[k] == 0)
-                            {
-                                if (!results.ContainsKey($"{negatives[i]}{positives[j]}{positives[k]}"))
-                                    results.Add($"{negatives[i]}{positives[j]}{positives[k]}", new List<int>() { negatives[i], positives[j], positives[k] });
+                                var arr = new[] {nums[i], nums[j], nums[k]};
+                                Array.Sort(arr);
+                                if (!ret.Any(x => x[0] == arr[0] && x[1] == arr[1] && x[2] == arr[2]))
+                                {
+                                    ret.Add(arr);
+                                }
                             }
                         }
                     }
                 }
-
-                return results.Values.ToList();
+                return ret;
             }
         }
     }
