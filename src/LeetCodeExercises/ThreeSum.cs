@@ -17,24 +17,41 @@ namespace LeetCodeExercises
             public IList<IList<int>> ThreeSum(int[] nums)
             {
                 var ret = new List<IList<int>>();
-                for (var i = 2; i < nums.Length; i++)
+
+                Array.Sort(nums);
+
+                for (var i = 0; i < nums.Length - 2; i++)
                 {
-                    for (var j = 1; j < i; j++)
+                    if (i > 0 && nums[i] == nums[i - 1]) continue;
+
+                    var front = i + 1;
+                    var end = nums.Length - 1;
+
+                    while (front < end)
                     {
-                        for (var k = 0; k < j; k++)
+                        var next = nums[front];
+                        var last = nums[end];
+                        var sum = next + nums[i] + last;
+
+                        if (sum == 0)
                         {
-                            if (nums[i] + nums[j] + nums[k] == 0)
-                            {
-                                var arr = new[] {nums[i], nums[j], nums[k]};
-                                Array.Sort(arr);
-                                if (!ret.Any(x => x[0] == arr[0] && x[1] == arr[1] && x[2] == arr[2]))
-                                {
-                                    ret.Add(arr);
-                                }
-                            }
+                            ret.Add(new[] { nums[i], next, last });
+                            while (front < end && nums[front] == nums[front + 1]) front++;
+                            while (front < end && nums[end] == nums[end - 1]) end--;
+                            front++;
+                            end--;
+                        }
+                        else if (sum > 0)
+                        {
+                            end--;
+                        }
+                        else if (sum < 0)
+                        {
+                            front++;
                         }
                     }
                 }
+
                 return ret;
             }
         }

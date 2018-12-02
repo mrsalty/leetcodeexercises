@@ -17,6 +17,8 @@ namespace LeetCodeExercises.Tests.Unit
         [TestCaseSource(nameof(ThreeSumTestCaseSource1))]
         [TestCaseSource(nameof(ThreeSumTestCaseSource2))]
         [TestCaseSource(nameof(ThreeSumTestCaseSource3))]
+        [TestCaseSource(nameof(ThreeSumTestCaseSource4))]
+        [TestCaseSource(nameof(ThreeSumTestCaseSource5))]
         public void GivenArrayOfIntegrers_ThenCalculateThreeSumsEqualZero(int[] nums, int[,] expected)
         {
             var threeSum = _sut.ThreeSum(nums);
@@ -41,6 +43,16 @@ namespace LeetCodeExercises.Tests.Unit
         public static IEnumerable<TestCaseData> ThreeSumTestCaseSource3()
         {
             yield return new TestCaseData(new[] { -1, 0, 3, 2, 5, -1 }, new[,] { { -1, -1, 2 } });
+        }
+
+        public static IEnumerable<TestCaseData> ThreeSumTestCaseSource4()
+        {
+            yield return new TestCaseData(new[] { -10, -8, -3, 74, -12, 13 }, new[,] { { -10, -3, 13 } });
+        }
+
+        public static IEnumerable<TestCaseData> ThreeSumTestCaseSource5()
+        {
+            yield return new TestCaseData(new[] { -2, 0, 1, 1, 2 }, new[,] { { -2, 0, 2 }, { -2, 1, 1 } });
         }
 
         private List<List<int>> ToList(int[,] nums)

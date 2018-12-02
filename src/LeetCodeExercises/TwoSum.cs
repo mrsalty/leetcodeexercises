@@ -1,4 +1,6 @@
-﻿namespace LeetCodeExercises
+﻿using System.Collections.Generic;
+
+namespace LeetCodeExercises
 {
     public class TwoSum
     {
@@ -11,17 +13,19 @@
         {
             public int[] TwoSum(int[] nums, int target)
             {
-                for (var i = 1; i < nums.Length; i++)
+                var dictionary = new Dictionary<int, int>();
+                for (var i = 0; i < nums.Length; i++)
                 {
-                    for (var j = 0; j < i; j++)
+                    var lookupValue = target - nums[i];
+                    if (!dictionary.ContainsKey(lookupValue) && !dictionary.ContainsKey(nums[i]))
                     {
-                        if (nums[i] + nums[j] == target)
-                        {
-                            return new[] { j, i };
-                        }
+                        dictionary.Add(nums[i], i);
+                    }
+                    else if (dictionary.ContainsKey(lookupValue))
+                    {
+                        return new[] { dictionary[lookupValue], i };
                     }
                 }
-
                 return new[] { -1, -1 };
             }
         }
