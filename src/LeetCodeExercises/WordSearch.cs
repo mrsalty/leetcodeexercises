@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
-
-namespace LeetCodeExercises
+﻿namespace LeetCodeExercises
 {
     /// <summary>
     /// https://leetcode.com/problems/word-search/
