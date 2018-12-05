@@ -41,13 +41,9 @@ namespace LeetCodeExercises
                 for (int i = s.Length - 2; i >=0; i--)
                 {
                     if (nums[s[i]] >= nums[s[i + 1]])
-                    {
                         result += nums[s[i]];
-                    }
                     else
-                    {
                         result -= nums[s[i]];
-                    }
                 }
 
                 return result;
