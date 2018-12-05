@@ -19,8 +19,6 @@ namespace LeetCodeExercises.Tests.Unit
         [TestCase("LVIII", 58)]
         [TestCase("MCMXCIV", 1994)]
         [TestCase("MCCXLVI", 1246)]
-        //1000, 100, 100, 10, 50, 5, 1
-        //----  --------  ------  ----
         public void GivenRomanNumber_ThenTranslateToInteger(string roman, int expected)
         {
             Assert.AreEqual(expected, _sut.RomanToInt(roman));
