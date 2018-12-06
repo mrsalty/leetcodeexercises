@@ -18,7 +18,7 @@ namespace LeetCodeExercises.Algorithms
                 {
                     return ret;
                 }
-
+                
                 intervals = intervals.OrderBy(x => x.start).ToList();
 
                 foreach (Interval interval in intervals)
