@@ -11,9 +11,8 @@ namespace LeetCodeExercises.Tests.Unit.Algorithms
         {
             _sut = new IsPalindrome.Solution();
         }
-
-        [Ignore("WIP")]
-        [TestCase(".,", false)]
+        
+        [TestCase(".,", true)]
         [TestCase("0P", false)]
         [TestCase("abba", true)]
         [TestCase("abcba", true)]
