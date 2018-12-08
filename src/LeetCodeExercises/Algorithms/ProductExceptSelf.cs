@@ -9,24 +9,24 @@
         {
             public int[] ProductExceptSelf(int[] nums)
             {
-                var res = new int[nums.Length];
+                var output = new int[nums.Length];
 
                 //traverse from left 
-                var tmp = 1;
+                var prod = 1;
                 for (var i = 0; i < nums.Length; i++)
                 {
-                    res[i] = tmp;
-                    tmp *= nums[i];
+                    output[i] = prod;
+                    prod *= nums[i];
                 }
 
-                tmp = 1;
+                prod = 1;
                 //traverse from right 
                 for (var i = nums.Length - 1; i >= 0; i--)
                 {
-                    res[i] *= tmp;
-                    tmp *= nums[i];
+                    output[i] *= prod;
+                    prod *= nums[i];
                 }
-                return res;
+                return output;
             }
         }
     }

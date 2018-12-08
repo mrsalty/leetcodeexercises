@@ -1,10 +1,11 @@
-﻿using NUnit.Framework;
+﻿using LeetCodeExercises.Algorithms;
+using NUnit.Framework;
 
 namespace LeetCodeExercises.Tests.Unit.Algorithms
 {
     class BestTimeToBuyAndSellStockTests
     {
-        private BestTimeToBuyAndSellStock.Solution _sut;
+        private readonly BestTimeToBuyAndSellStock.Solution _sut;
 
         public BestTimeToBuyAndSellStockTests()
         {

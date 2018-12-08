@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace LeetCodeExercises.Algorithms
 {
@@ -9,23 +10,26 @@ namespace LeetCodeExercises.Algorithms
             public bool IsValid(string s)
             {
                 var stack = new Stack<char>();
-                foreach (char c in s)
+                for (int i = 0; i < s.Length; i++)
                 {
-                    if (c == ' ') continue;
-                    if (c == '(')
-                        stack.Push(')');
-                    else if (c == '{')
+                    if (s[i] == ' ')
+                        continue;
+
+                    if (s[i] == '{')
                         stack.Push('}');
-                    else if (c == '[')
+                    else if (s[i] == '[')
                         stack.Push(']');
+                    else if (s[i] == '(')
+                        stack.Push(')');
                     else
                     {
                         if (stack.Count == 0) return false;
-                        var match = stack.Pop() == c;
-                        if (!match) return false;
+                        if (s[i] != stack.Pop())
+                        {
+                            return false;
+                        }
                     }
                 }
-
                 return stack.Count == 0;
             }
         }

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.NetworkInformation;
 
-namespace LeetCodeExercises
+namespace LeetCodeExercises.Algorithms
 {
     /// <summary>
     /// https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
@@ -17,14 +14,16 @@ namespace LeetCodeExercises
         {
             public int MaxProfit(int[] prices)
             {
-                var maxCurrent = 0;
-                var max = 0;
-                for (var i = 1; i < prices.Length; i++)
+                if (prices.Length == 0) return 0;
+                int minPrice = prices[0];
+                int maxProfit = 0;
+                for (int i = 0; i < prices.Length - 1; i++)
                 {
-                    maxCurrent = Math.Max(0, maxCurrent + (prices[i] - prices[i - 1]));
-                    max = Math.Max(maxCurrent, max);
+                    minPrice = Math.Min(minPrice, Math.Min(prices[i], prices[i + 1]));
+                    maxProfit = Math.Max(maxProfit, prices[i + 1] - minPrice);
                 }
-                return max;
+
+                return maxProfit;
             }
         }
     }
