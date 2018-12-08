@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LeetCodeExercises.Algorithms
 {
     /// <summary>
     /// https://leetcode.com/problems/meeting-rooms-ii/
+    /// Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei), find the minimum number of conference rooms required.
     /// </summary>
     public class MeetingRoomsIi
     {
@@ -12,36 +14,29 @@ namespace LeetCodeExercises.Algorithms
         {
             public int MinMeetingRooms(Algorithms.Interval[] intervals)
             {
-                if (!intervals.Any())
+                var starts = new int[intervals.Length];
+                var ends = new int[intervals.Length];
+
+                for (int i = 0; i < intervals.Length; i++)
                 {
-                    return 0;
+                    starts[i] = intervals[i].start;
+                    ends[i] = intervals[i].end;
                 }
 
-                int result = 0;
-                int count = 0;
-                var ends = new List<Algorithms.Interval>();
+                Array.Sort(starts);
+                Array.Sort(ends);
 
-                var orderedByStart = intervals.OrderBy(x => x.start);
-                foreach (var interval in orderedByStart)
+                var rooms = 0;
+                var endsIndex = 0;
+                for (int i = 0; i < starts.Length; i++)
                 {
-                    var itemWithStartMajorCurrentItemEnd = ends.FirstOrDefault(x => interval.start >= x.end);
-
-                    if (count == 0 || itemWithStartMajorCurrentItemEnd == null) 
-                    {
-                        ends.Add(interval);
-                        result++;
-                    }
+                    if (starts[i] < ends[endsIndex])
+                        rooms++;
                     else
-                    {
-                        itemWithStartMajorCurrentItemEnd.start = interval.start;
-                        itemWithStartMajorCurrentItemEnd.end = interval.end;
-                    }
-
-                    ends = ends.OrderByDescending(x => x.end).ToList();
-                    count++;
+                        endsIndex++;
                 }
 
-                return result;
+                return rooms;
             }
         }
 

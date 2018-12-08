@@ -1,4 +1,5 @@
-﻿using LeetCodeExercises.Algorithms;
+﻿using System.Collections.Generic;
+using LeetCodeExercises.Algorithms;
 using NUnit.Framework;
 
 namespace LeetCodeExercises.Tests.Unit.Algorithms
@@ -12,68 +13,61 @@ namespace LeetCodeExercises.Tests.Unit.Algorithms
             _sut = new MeetingRoomsIi.Solution();
         }
 
-        [Test]
-        public void MeetingRoomsTest1()
+        [TestCaseSource(nameof(TestCase1))]
+        [TestCaseSource(nameof(TestCase2))]
+        [TestCaseSource(nameof(TestCase3))]
+        [TestCaseSource(nameof(TestCase4))]
+        public void GivenIntervals_ThenCalculateMinMeetingRooms(Interval[] intervals, int expected)
         {
-            var intervals = new[]
-            {
-                new Interval(1, 3),
-                new Interval(6, 9),
-                new Interval(2, 4)
-            };
-
-            var result = _sut.MinMeetingRooms(intervals);
-
-            Assert.AreEqual(2, result);
-
+            Assert.AreEqual(expected, _sut.MinMeetingRooms(intervals));
         }
 
         [Test]
-        public void MeetingRoomsTest2()
+        private static IEnumerable<TestCaseData> TestCase1()
         {
-            var intervals = new[]
-            {
-                new Interval(13, 15),
-                new Interval(1, 13)
-            };
-
-            var result = _sut.MinMeetingRooms(intervals);
-
-            Assert.AreEqual(1, result);
-
+            yield return new TestCaseData(
+                new[]
+                {
+                    new Interval(1, 3),
+                    new Interval(6, 9),
+                    new Interval(2, 4)
+                }, 2);
         }
 
         [Test]
-        public void MeetingRoomsTest3()
+        private static IEnumerable<TestCaseData> TestCase2()
         {
-            var intervals = new[]
-            {
-                new Interval(9,10),
-                new Interval(4,9),
-                new Interval(4,17)
-            };
-
-            var result = _sut.MinMeetingRooms(intervals);
-
-            Assert.AreEqual(2, result);
-
+            yield return new TestCaseData(
+                new[]
+                {
+                    new Interval(13, 15),
+                    new Interval(1, 13)
+                }, 1);
         }
 
         [Test]
-        public void MeetingRoomsTest4()
+        private static IEnumerable<TestCaseData> TestCase3()
         {
-            var intervals = new[]
-            {
-                new Interval(1,3),
-                new Interval(6,9),
-                new Interval(2,4),
-                new Interval(8,10),
-            };
+            yield return new TestCaseData(
+                new[]
+                {
+                    new Interval(9,10),
+                    new Interval(4,9),
+                    new Interval(4,17)
+                }, 2);
+        }
 
-            var result = _sut.MinMeetingRooms(intervals);
-
-            Assert.AreEqual(2, result);
-
+        [Test]
+        private static IEnumerable<TestCaseData> TestCase4()
+        {
+            yield return new TestCaseData(
+                new[]
+                {
+                    new Interval(1,3),
+                    new Interval(6,9),
+                    new Interval(2,4),
+                    new Interval(8,10),
+                }, 2);
         }
     }
 
